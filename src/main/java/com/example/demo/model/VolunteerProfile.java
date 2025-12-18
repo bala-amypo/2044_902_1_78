@@ -1,12 +1,39 @@
-package com.example.demo.entity;
+package com.example.demo;
 
-import jakatra.persistance.*;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-@model
-@table(
+@Entity
+@Table(
     name = "volunteer_profile",
-    uniqueCo
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "volunteerId"),
+        @UniqueConstraint(columnNames = "email"),
+        @UniqueConstraint(columnNames = "phone")
+    }
 )
 public class VolunteerProfile {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String volunteerId;
+
+    @Column(nullable = false)
+    private String fullName;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String phone;
+
+    @Enumerated(EnumType.STRING)
+    private AvailabilityStatus availabilityStatus;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    // getters & setters
 }
