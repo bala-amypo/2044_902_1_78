@@ -1,4 +1,4 @@
-package com.example.demo.Entity;
+package com.example.demo.VolunteerProfile;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
