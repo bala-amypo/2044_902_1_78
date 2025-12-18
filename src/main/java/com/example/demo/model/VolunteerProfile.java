@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -35,5 +35,4 @@ public class VolunteerProfile {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // getters & setters
 }
