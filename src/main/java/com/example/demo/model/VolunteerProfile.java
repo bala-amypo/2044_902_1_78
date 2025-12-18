@@ -38,7 +38,7 @@ public class VolunteerProfile {
 }
 
 
-public enum AvailabilityStatus {
+public enum VolunteerProfile {
     AVAILABLE,
     UNAVAILABLE,
     BUSY
