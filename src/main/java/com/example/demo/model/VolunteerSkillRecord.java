@@ -27,6 +27,3 @@ public class VolunteerSkillRecord {
 
     // getters & setters
 }
-public class VolunteerSkillRecord {
-    
-}
