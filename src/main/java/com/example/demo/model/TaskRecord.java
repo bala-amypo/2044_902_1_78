@@ -15,6 +15,13 @@ public class TakeRecord {
     private String requiredSkill;
     private String requiredSkillLevel;
     private String priority;
-    
+    private String status;
+    private LocalDateTime createdAt;
+
+    @Prepersist
+    void onCreate() {
+        createdAt = LocalDateTime.now();
+            status = "OPEN";
+    }
 
 }
