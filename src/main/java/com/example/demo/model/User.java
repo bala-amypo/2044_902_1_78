@@ -21,7 +21,3 @@ public class User {
 
     // getters & setters
 }
-
-public class User {
-
-}
