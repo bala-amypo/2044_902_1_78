@@ -1,6 +1,6 @@
 package com.example.demo.model.TakeRecord;
 
-import jakarta.persistance.*;
+import jakarta.persistence.*;
 import java. time.LocalDateTime;
 @Entity
 public class TaskRecord {
@@ -18,7 +18,7 @@ public class TaskRecord {
     private String status;
     private LocalDateTime createdAt;
 
-    @Prepersist
+    @PrePersist
     void onCreate() {
         createdAt = LocalDateTime.now();
             status = "OPEN";
