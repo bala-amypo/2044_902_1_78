@@ -6,7 +6,7 @@ import java. time.LocalDateTime;
 public class TaskRecord {
 
     @Id
-    @generatedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
@@ -16,7 +16,6 @@ public class TaskRecord {
     private String requiredSkillLevel;
     private String priority;
     private String status;
-    private LocalDateTime createdAt;
 
     @PrePersist
     void onCreate() {
