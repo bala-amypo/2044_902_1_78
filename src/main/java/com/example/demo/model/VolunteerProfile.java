@@ -31,3 +31,18 @@ public class VolunteerProfile {
     }
 
     // getters & setters
+    public String getEmail() {
+    return email;
+}
+
+public String getAvailabilityStatus() {
+    return availabilityStatus;
+}
+
+public void setAvailabilityStatus(String availabilityStatus) {
+    this.availabilityStatus = availabilityStatus;
+}
+
+public Long getId() {
+    return id;
+}

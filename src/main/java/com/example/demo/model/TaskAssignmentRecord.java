@@ -27,4 +27,12 @@ public class TaskAssignmentRecord {
     }
 
     // getters & setters
+    public void setTaskId(Long taskId) {
+    this.taskId = taskId;
+}
+
+public void setVolunteerId(Long volunteerId) {
+    this.volunteerId = volunteerId;
+}
+
 }

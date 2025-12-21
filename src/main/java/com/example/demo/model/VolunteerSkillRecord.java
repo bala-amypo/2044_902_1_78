@@ -26,4 +26,11 @@ public class VolunteerSkillRecord {
     }
 
     // getters & setters
+    public Long getVolunteerId() {
+    return volunteerId;
+}
+
+public String getSkillName() {
+    return skillName;
+}
 }
