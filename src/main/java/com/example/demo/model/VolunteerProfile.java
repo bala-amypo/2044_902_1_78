@@ -31,4 +31,3 @@ public class VolunteerProfile {
     }
 
     // getters & setters
-}
