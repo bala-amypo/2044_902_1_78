@@ -12,8 +12,8 @@ public class VolunteerSkillService {
 
     private final VolunteerSkillRecordRepository repository;
 
-    public VolunteerSkillService(VolunteerSkillRecordRepository repo) {
-        this.repo = repo;
+    public VolunteerSkillService(VolunteerSkillRecordRepository repository) {
+        this.repository = repository;
     }
 
     public VolunteerSkillRecord addSkill(VolunteerSkillRecord skill) {
