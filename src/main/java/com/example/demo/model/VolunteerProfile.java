@@ -46,3 +46,4 @@ public void setAvailabilityStatus(String availabilityStatus) {
 public Long getId() {
     return id;
 }
+}
