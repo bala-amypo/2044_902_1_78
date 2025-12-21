@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class VolunteerSkillService {
 
-    private final VolunteerSkillRecordRepository repo;
+    private final VolunteerSkillRecordRepository repository;
 
     public VolunteerSkillService(VolunteerSkillRecordRepository repo) {
         this.repo = repo;
