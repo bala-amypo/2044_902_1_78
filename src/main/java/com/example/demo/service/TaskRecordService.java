@@ -17,7 +17,7 @@ public class TaskRecordService {
     }
 
     public TaskRecord create(TaskRecord task) {
-        return repoitory.save(task);
+        return repository.save(task);
     }
 
     public TaskRecord getById(Long id) {
