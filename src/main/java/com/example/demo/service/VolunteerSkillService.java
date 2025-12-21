@@ -27,4 +27,8 @@ public class VolunteerSkillService {
     public List<VolunteerSkillRecord> getSkills(Long volunteerId) {
         return repo.findByVolunteerId(volunteerId);
     }
+
+    public VolunteerSkillRecord create(VolunteerSkillRecord skill) {
+    return repository.save(skill);
+}
 }
