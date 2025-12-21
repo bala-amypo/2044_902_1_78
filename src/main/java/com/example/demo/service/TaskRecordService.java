@@ -10,22 +10,23 @@ import java.util.List;
 @Service
 public class TaskRecordService {
 
-    private final TaskRecordRepository repo;
+    private final TaskRecordRepository repository;
 
-    public TaskRecordService(TaskRecordRepository repo) {
-        this.repo = repo;
+    public TaskRecordService(TaskRecordRepository repository) {
+        this.repository = repository;
     }
 
-    public TaskRecord create(TaskRecord task) {
+    public TaskRecord createTask(TaskRecord task) {
         return repository.save(task);
     }
+}
+
 
     public TaskRecord getById(Long id) {
-        return repo.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found"));
     }
 
     public List<TaskRecord> getOpenTasks() {
-        return repo.findByStatus("OPEN");
+        return repository.findByStatus("OPEN");
     }
-}
