@@ -25,4 +25,5 @@ public class TaskRecordController {
     public List<TaskRecord> getAllTasks() {
         return service.getAllTasks();
     }
+
 }
