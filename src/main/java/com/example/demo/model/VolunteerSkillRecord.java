@@ -1,53 +1,41 @@
-package com.example.demo.model;
+package com.example.demo.service;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import com.example.demo.model.VolunteerSkillRecord;
+import com.example.demo.repository.VolunteerSkillRecordRepository;
+import org.springframework.stereotype.Service;
 
-@Entity
-public class VolunteerSkillRecord {
+import java.util.List;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Service
+public class VolunteerSkillService {
 
-    private Long volunteerId;
+    private final VolunteerSkillRecordRepository repository;
 
-    private String skillName;
-
-    private String skillLevel; // BEGINNER / INTERMEDIATE / EXPERT
-
-    private Boolean certified;
-
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    void onUpdate() {
-        updatedAt = LocalDateTime.now();
+    public VolunteerSkillService(VolunteerSkillRecordRepository repository) {
+        this.repository = repository;
     }
 
-    // getters & setters
-    public Long getVolunteerId() {
-    return volunteerId;
-}
+    public VolunteerSkillRecord create(VolunteerSkillRecord skill) {
+        return repository.save(skill);
+    }
 
-public String getSkillName() {
-    return skillName;
-}
+    public List<VolunteerSkillRecord> getAll() {
+        return repository.findAll();
+    }
 
-public String getSkillName() {
-    return skillName;
-}
+    public VolunteerSkillRecord getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Skill not found"));
+    }
 
-public void setSkillName(String skillName) {
-    this.skillName = skillName;
-}
+    public VolunteerSkillRecord update(Long id, VolunteerSkillRecord skill) {
+        VolunteerSkillRecord existing = getById(id);
+        existing.setSkillName(skill.getSkillName());
+        existing.setSkillLevel(skill.getSkillLevel());
+        return repository.save(existing);
+    }
 
-public String getSkillLevel() {
-    return skillLevel;
-}
-
-public void setSkillLevel(String skillLevel) {
-    this.skillLevel = skillLevel;
-}
-
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }
