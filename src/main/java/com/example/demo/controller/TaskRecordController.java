@@ -18,4 +18,10 @@ public class TaskRecordController {
     public TaskRecord create(@RequestBody TaskRecord task) {
         return service.createTask(task);
     }
+
+    @GetMapping
+    public List<TaskRecord> getAllTasks() {
+        return service.getAllTasks();
+}
+
 }
