@@ -23,8 +23,19 @@ public class TaskRecordService {
         return repository.findAll();
     }
 
-    public void deleteTask(Long id) {
-    repository.deleteById(id);
+    public TaskRecord getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
     }
 
+    public TaskRecord update(Long id, TaskRecord task) {
+        TaskRecord existing = getById(id);
+        existing.setTaskName(task.getTaskName());
+        existing.setRequiredSkill(task.getRequiredSkill());
+        return repository.save(existing);
+    }
+
+    public void deleteTask(Long id) {
+        repository.deleteById(id);
+    }
 }
