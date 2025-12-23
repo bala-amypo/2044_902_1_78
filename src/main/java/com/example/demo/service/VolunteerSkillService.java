@@ -16,4 +16,24 @@ public class VolunteerSkillService {
     public VolunteerSkillRecord create(VolunteerSkillRecord skill) {
         return repository.save(skill);
     }
+
+    public List<VolunteerSkillRecord> getAll() {
+        return repository.findAll();
+    }
+
+    public VolunteerSkillRecord getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Skill not found"));
+    }
+
+    public VolunteerSkillRecord update(Long id, VolunteerSkillRecord skill) {
+        VolunteerSkillRecord existing = getById(id);
+        existing.setSkillName(skill.getSkillName());
+        existing.setSkillLevel(skill.getSkillLevel());
+        return repository.save(existing);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }

@@ -27,4 +27,15 @@ public class VolunteerProfileService {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Volunteer not found"));
     }
+
+    public VolunteerProfile update(Long id, VolunteerProfile v) {
+        VolunteerProfile existing = getById(id);
+        existing.setFullName(v.getFullName());
+        existing.setAvailabilityStatus(v.getAvailabilityStatus());
+        return repository.save(existing);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }
