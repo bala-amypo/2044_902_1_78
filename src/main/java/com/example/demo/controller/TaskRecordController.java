@@ -26,4 +26,9 @@ public class TaskRecordController {
         return service.getAllTasks();
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteTask(@PathVariable Long id) {
+    service.deleteTask(id);
+}
+
 }

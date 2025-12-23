@@ -22,4 +22,9 @@ public class TaskRecordService {
     public List<TaskRecord> getAllTasks() {
         return repository.findAll();
     }
+
+    public void deleteTask(Long id) {
+    repository.deleteById(id);
+    }
+
 }
