@@ -2,10 +2,6 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
-package com.example.demo.model;
-
-import jakarta.persistence.*;
-
 @Entity
 public class VolunteerSkillRecord {
 
@@ -13,12 +9,10 @@ public class VolunteerSkillRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long volunteerId;   // ✅ ADD THIS
-
+    private Long volunteerId;
     private String skillName;
     private String skillLevel;
 
-    // getters & setters
     public Long getId() {
         return id;
     }
