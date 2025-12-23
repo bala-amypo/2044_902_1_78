@@ -15,6 +15,11 @@ public class TaskRecordController {
         this.service = service;
     }
 
+    public List<TaskRecord> getAllTasks() {
+    return repository.findAll();
+    }
+
+
     @PostMapping
     public TaskRecord create(@RequestBody TaskRecord task) {
         return service.createTask(task);
