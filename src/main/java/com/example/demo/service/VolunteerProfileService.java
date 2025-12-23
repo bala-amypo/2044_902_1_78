@@ -1,7 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.exception.BadRequestException;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.VolunteerProfile;
 import com.example.demo.repository.VolunteerProfileRepository;
 import org.springframework.stereotype.Service;
@@ -11,32 +9,22 @@ import java.util.List;
 @Service
 public class VolunteerProfileService {
 
-    private final VolunteerProfileRepository repo;
+    private final VolunteerProfileRepository repository;
 
-    public VolunteerProfileService(VolunteerProfileRepository repo) {
-        this.repo = repo;
+    public VolunteerProfileService(VolunteerProfileRepository repository) {
+        this.repository = repository;
     }
 
-    public VolunteerProfile createVolunteer(VolunteerProfile v) {
-        if (repo.existsByEmail(v.getEmail())) {
-            throw new BadRequestException("Email already exists");
-        }
-        v.setAvailabilityStatus("AVAILABLE");
-        return repo.save(v);
-    }
-
-    public VolunteerProfile getVolunteer(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Volunteer not found"));
+    public VolunteerProfile save(VolunteerProfile v) {
+        return repository.save(v);
     }
 
     public List<VolunteerProfile> getAll() {
-        return repo.findAll();
+        return repository.findAll();
     }
 
-    public VolunteerProfile updateAvailability(Long id, String status) {
-        VolunteerProfile v = getVolunteer(id);
-        v.setAvailabilityStatus(status);
-        return repo.save(v);
+    public VolunteerProfile getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Volunteer not found"));
     }
 }
