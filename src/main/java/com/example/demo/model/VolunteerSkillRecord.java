@@ -1,41 +1,35 @@
-package com.example.demo.service;
+package com.example.demo.model;
 
-import com.example.demo.model.VolunteerSkillRecord;
-import com.example.demo.repository.VolunteerSkillRecordRepository;
-import org.springframework.stereotype.Service;
+import jakarta.persistence.*;
 
-import java.util.List;
+@Entity
+public class VolunteerSkillRecord {
 
-@Service
-public class VolunteerSkillService {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private final VolunteerSkillRecordRepository repository;
+    private String skillName;
+    private String skillLevel;
 
-    public VolunteerSkillService(VolunteerSkillRecordRepository repository) {
-        this.repository = repository;
+    // getters & setters
+    public Long getId() {
+        return id;
     }
 
-    public VolunteerSkillRecord create(VolunteerSkillRecord skill) {
-        return repository.save(skill);
+    public String getSkillName() {
+        return skillName;
     }
 
-    public List<VolunteerSkillRecord> getAll() {
-        return repository.findAll();
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
     }
 
-    public VolunteerSkillRecord getById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Skill not found"));
+    public String getSkillLevel() {
+        return skillLevel;
     }
 
-    public VolunteerSkillRecord update(Long id, VolunteerSkillRecord skill) {
-        VolunteerSkillRecord existing = getById(id);
-        existing.setSkillName(skill.getSkillName());
-        existing.setSkillLevel(skill.getSkillLevel());
-        return repository.save(existing);
-    }
-
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public void setSkillLevel(String skillLevel) {
+        this.skillLevel = skillLevel;
     }
 }
