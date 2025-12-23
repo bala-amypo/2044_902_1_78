@@ -1,3 +1,9 @@
+import com.example.demo.model.VolunteerSkillRecord;
+import com.example.demo.service.VolunteerSkillService;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+
 @RestController
 @RequestMapping("/api/skills")
 public class VolunteerSkillController {

@@ -1,3 +1,8 @@
+import com.example.demo.model.VolunteerProfile;
+import com.example.demo.service.VolunteerProfileService;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/volunteers")
 public class VolunteerProfileController {
