@@ -28,4 +28,20 @@ public class TaskRecord {
     }
 
     // getters & setters
+    public String getTaskName() {
+    return taskName;
+}
+
+public void setTaskName(String taskName) {
+    this.taskName = taskName;
+}
+
+public String getRequiredSkill() {
+    return requiredSkill;
+}
+
+public void setRequiredSkill(String requiredSkill) {
+    this.requiredSkill = requiredSkill;
+}
+
 }
