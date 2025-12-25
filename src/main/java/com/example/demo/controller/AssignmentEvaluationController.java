@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.AssignmentEvaluationRecord;
-import com.example.demo.service.AssignmentEvaluationRecordService;
+import com.example.demo.service.AssignmentEvaluationService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.List;
 @RequestMapping("/api/assignment-evaluations")
 public class AssignmentEvaluationController {
 
-    private final AssignmentEvaluationRecordService service;
+    private final AssignmentEvaluationService service;
 
     public AssignmentEvaluationController(
-            AssignmentEvaluationRecordService service) {
+            AssignmentEvaluationService service) {
         this.service = service;
     }
 
