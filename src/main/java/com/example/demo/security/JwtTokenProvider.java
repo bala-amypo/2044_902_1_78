@@ -1,3 +1,11 @@
+import org.springframework.stereotype.Component;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+
+import java.util.Date;
+import java.security.Key;
+
+
 @Component
 public class JwtTokenProvider {
 
