@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/skills")
+@RequestMapping("/api/volunteers")
 public class VolunteerSkillController {
 
     private final VolunteerSkillService service;
