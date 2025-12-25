@@ -1,34 +1,22 @@
-package com.example.demo.service;
-
-import com.example.demo.model.TaskAssignment;
-import com.example.demo.repository.TaskAssignmentRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 @Service
 public class TaskAssignmentService {
 
-    private final TaskAssignmentRepository repo;
+    private final TaskAssignmentRecordRepository repo;
 
-    public TaskAssignmentService(TaskAssignmentRepository repo) {
+    public TaskAssignmentService(TaskAssignmentRecordRepository repo) {
         this.repo = repo;
     }
 
-    public TaskAssignment create(TaskAssignment assignment) {
-        return repo.save(assignment);
+    public TaskAssignmentRecord create(TaskAssignmentRecord t) {
+        return repo.save(t);
     }
 
-    public List<TaskAssignment> getAll() {
+    public List<TaskAssignmentRecord> getAll() {
         return repo.findAll();
     }
 
-    public TaskAssignment getById(Long id) {
-        return repo.findById(id).orElseThrow();
-    }
-
-    public TaskAssignment update(Long id, TaskAssignment updated) {
-        TaskAssignment existing = getById(id);
+    public TaskAssignmentRecord update(Long id, TaskAssignmentRecord updated) {
+        TaskAssignmentRecord existing = repo.findById(id).orElseThrow();
         existing.setTaskId(updated.getTaskId());
         existing.setVolunteerId(updated.getVolunteerId());
         existing.setStatus(updated.getStatus());
