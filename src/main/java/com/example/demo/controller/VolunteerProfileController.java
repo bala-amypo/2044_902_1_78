@@ -16,7 +16,8 @@ public class VolunteerProfileController {
     // POST
     @PostMapping
     public VolunteerProfile create(@RequestBody VolunteerProfile v) {
-        return service.save(v);
+        return service.create(volunteerProfile);
+;
     }
 
     // GET all
