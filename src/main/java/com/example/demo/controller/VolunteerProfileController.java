@@ -15,10 +15,12 @@ public class VolunteerProfileController {
 
     // POST
     @PostMapping
-    public VolunteerProfile create(@RequestBody VolunteerProfile v) {
-        return service.create(volunteerProfile);
-;
+    public VolunteerProfile create(
+        @RequestBody VolunteerProfile volunteerProfile) {
+
+    return service.create(volunteerProfile);
     }
+
 
     // GET all
     @GetMapping
