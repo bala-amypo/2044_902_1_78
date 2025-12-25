@@ -1,41 +1,42 @@
 package com.example.demo.service;
 
-import com.example.demo.model.VolunteerProfile;
-import com.example.demo.repository.VolunteerProfileRepository;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.demo.model.VolunteerProfile;
+import com.example.demo.repository.VolunteerProfileRepository;
 
 @Service
 public class VolunteerProfileService {
 
-    private final VolunteerProfileRepository repository;
+    private final VolunteerProfileRepository repo;
 
-    public VolunteerProfileService(VolunteerProfileRepository repository) {
-        this.repository = repository;
+    public VolunteerProfileService(VolunteerProfileRepository repo) {
+        this.repo = repo;
     }
 
-    public VolunteerProfile save(VolunteerProfile v) {
-        return repository.save(v);
+    public VolunteerProfile create(VolunteerProfile v) {
+        return repo.save(v);
     }
 
     public List<VolunteerProfile> getAll() {
-        return repository.findAll();
+        return repo.findAll();
     }
 
     public VolunteerProfile getById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Volunteer not found"));
+        return repo.findById(id).orElseThrow();
     }
 
     public VolunteerProfile update(Long id, VolunteerProfile v) {
         VolunteerProfile existing = getById(id);
         existing.setFullName(v.getFullName());
-        existing.setAvailabilityStatus(v.getAvailabilityStatus());
-        return repository.save(existing);
+        existing.setEmail(v.getEmail());
+        existing.setPhone(v.getPhone());
+        return repo.save(existing);
     }
 
     public void delete(Long id) {
-        repository.deleteById(id);
+        repo.deleteById(id);
     }
 }
