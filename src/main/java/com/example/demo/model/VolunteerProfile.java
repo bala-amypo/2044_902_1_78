@@ -13,6 +13,17 @@ public class VolunteerProfile {
     private String email;
     private String phone;
 
+    private String availabilityStatus;
+
+public String getAvailabilityStatus() {
+    return availabilityStatus;
+}
+
+public void setAvailabilityStatus(String availabilityStatus) {
+    this.availabilityStatus = availabilityStatus;
+}
+
+
     // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
