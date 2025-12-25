@@ -1,11 +1,10 @@
 package com.example.demo.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.example.demo.model.VolunteerSkillRecord;
 import com.example.demo.repository.VolunteerSkillRecordRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class VolunteerSkillService {
@@ -16,26 +15,31 @@ public class VolunteerSkillService {
         this.repo = repo;
     }
 
-    public VolunteerSkillRecord create(VolunteerSkillRecord v) {
-        return repo.save(v);
+    // CREATE
+    public VolunteerSkillRecord create(VolunteerSkillRecord skill) {
+        return repo.save(skill);
     }
 
+    // READ ALL
     public List<VolunteerSkillRecord> getAll() {
         return repo.findAll();
     }
 
+    // READ BY ID
     public VolunteerSkillRecord getById(Long id) {
-        return repo.findById(id).orElseThrow();
+        return repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Skill not found"));
     }
 
-    public VolunteerSkillRecord update(Long id, VolunteerSkillRecord v) {
+    // UPDATE
+    public VolunteerSkillRecord update(Long id, VolunteerSkillRecord skill) {
         VolunteerSkillRecord existing = getById(id);
-        existing.setSkillName(v.getSkillName());
-        existing.setSkillLevel(v.getSkillLevel());
-        existing.setVolunteerId(v.getVolunteerId());
+        existing.setSkillName(skill.getSkillName());
+        existing.setSkillLevel(skill.getSkillLevel());
         return repo.save(existing);
     }
 
+    // DELETE
     public void delete(Long id) {
         repo.deleteById(id);
     }
