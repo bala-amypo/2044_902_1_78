@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.TaskAssignment;
+import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.service.TaskAssignmentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,25 +17,25 @@ public class TaskAssignmentController {
     }
 
     @PostMapping
-    public TaskAssignment create(@RequestBody TaskAssignment assignment) {
-        return service.create(assignment);
+    public TaskAssignmentRecord create(@RequestBody TaskAssignmentRecord t) {
+        return service.create(t);
     }
 
     @GetMapping
-    public List<TaskAssignment> getAll() {
+    public List<TaskAssignmentRecord> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public TaskAssignment getById(@PathVariable Long id) {
+    public TaskAssignmentRecord getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
     @PutMapping("/{id}")
-    public TaskAssignment update(
+    public TaskAssignmentRecord update(
             @PathVariable Long id,
-            @RequestBody TaskAssignment assignment) {
-        return service.update(id, assignment);
+            @RequestBody TaskAssignmentRecord t) {
+        return service.update(id, t);
     }
 
     @DeleteMapping("/{id}")
