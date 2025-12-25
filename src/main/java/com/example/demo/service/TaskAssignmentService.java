@@ -1,51 +1,41 @@
 package com.example.demo.service;
 
-import com.example.demo.exception.BadRequestException;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.TaskAssignmentRecord;
-import com.example.demo.model.TaskRecord;
-import com.example.demo.model.VolunteerProfile;
-import com.example.demo.repository.TaskAssignmentRecordRepository;
-import com.example.demo.repository.TaskRecordRepository;
-import com.example.demo.repository.VolunteerProfileRepository;
+import com.example.demo.model.TaskAssignment;
+import com.example.demo.repository.TaskAssignmentRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TaskAssignmentService {
 
-    private final TaskAssignmentRecordRepository assignRepo;
-    private final TaskRecordRepository taskRepo;
-    private final VolunteerProfileRepository volunteerRepo;
+    private final TaskAssignmentRepository repo;
 
-    public TaskAssignmentService(
-            TaskAssignmentRecordRepository assignRepo,
-            TaskRecordRepository taskRepo,
-            VolunteerProfileRepository volunteerRepo) {
-        this.assignRepo = assignRepo;
-        this.taskRepo = taskRepo;
-        this.volunteerRepo = volunteerRepo;
+    public TaskAssignmentService(TaskAssignmentRepository repo) {
+        this.repo = repo;
     }
 
-    public TaskAssignmentRecord assign(Long taskId, Long volunteerId) {
+    public TaskAssignment create(TaskAssignment assignment) {
+        return repo.save(assignment);
+    }
 
-        if (assignRepo.existsByTaskIdAndStatus(taskId, "ACTIVE")) {
-            throw new BadRequestException("ACTIVE assignment");
-        }
+    public List<TaskAssignment> getAll() {
+        return repo.findAll();
+    }
 
-        TaskRecord task = taskRepo.findById(taskId)
-                .orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+    public TaskAssignment getById(Long id) {
+        return repo.findById(id).orElseThrow();
+    }
 
-        VolunteerProfile volunteer = volunteerRepo.findById(volunteerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Volunteer not found"));
+    public TaskAssignment update(Long id, TaskAssignment updated) {
+        TaskAssignment existing = getById(id);
+        existing.setTaskId(updated.getTaskId());
+        existing.setVolunteerId(updated.getVolunteerId());
+        existing.setStatus(updated.getStatus());
+        return repo.save(existing);
+    }
 
-        if (!"AVAILABLE".equals(volunteer.getAvailabilityStatus())) {
-            throw new BadRequestException("Volunteer not AVAILABLE");
-        }
-
-        TaskAssignmentRecord record = new TaskAssignmentRecord();
-        record.setTaskId(taskId);
-        record.setVolunteerId(volunteerId);
-
-        return assignRepo.save(record);
+    public void delete(Long id) {
+        repo.deleteById(id);
     }
 }
