@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/assignment-evaluations")
-public class AssignmentEvaluationRecordController {
+public class AssignmentEvaluationController {
 
     private final AssignmentEvaluationRecordService service;
 
