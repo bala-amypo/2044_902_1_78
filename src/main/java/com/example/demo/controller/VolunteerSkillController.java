@@ -1,8 +1,11 @@
-import com.example.demo.model.VolunteerSkillRecord;
-import com.example.demo.service.VolunteerSkillService;
-import org.springframework.web.bind.annotation.*;
+package com.example.demo.controller;
+
 import java.util.List;
 
+import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.model.VolunteerSkillRecord;
+import com.example.demo.service.VolunteerSkillService;
 
 @RestController
 @RequestMapping("/api/skills")
@@ -14,33 +17,28 @@ public class VolunteerSkillController {
         this.service = service;
     }
 
-    // POST
     @PostMapping
-    public VolunteerSkillRecord create(@RequestBody VolunteerSkillRecord skill) {
-        return service.create(skill);
+    public VolunteerSkillRecord create(@RequestBody VolunteerSkillRecord v) {
+        return service.create(v);
     }
 
-    // GET all
     @GetMapping
     public List<VolunteerSkillRecord> getAll() {
         return service.getAll();
     }
 
-    // GET by id
     @GetMapping("/{id}")
     public VolunteerSkillRecord getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
-    // PUT
     @PutMapping("/{id}")
     public VolunteerSkillRecord update(
             @PathVariable Long id,
-            @RequestBody VolunteerSkillRecord skill) {
-        return service.update(id, skill);
+            @RequestBody VolunteerSkillRecord v) {
+        return service.update(id, v);
     }
 
-    // DELETE
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
