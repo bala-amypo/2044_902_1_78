@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class AssignmentEvaluationRecord {
@@ -10,18 +9,21 @@ public class AssignmentEvaluationRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long assignmentId;
-
-    private Integer rating; // 1–5
-
+    private Long taskAssignmentId;
+    private int rating;
     private String feedback;
 
-    private LocalDateTime evaluatedAt;
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @PrePersist
-    void onEvaluate() {
-        evaluatedAt = LocalDateTime.now();
+    public Long getTaskAssignmentId() { return taskAssignmentId; }
+    public void setTaskAssignmentId(Long taskAssignmentId) {
+        this.taskAssignmentId = taskAssignmentId;
     }
 
-    // getters & setters
+    public int getRating() { return rating; }
+    public void setRating(int rating) { this.rating = rating; }
+
+    public String getFeedback() { return feedback; }
+    public void setFeedback(String feedback) { this.feedback = feedback; }
 }
