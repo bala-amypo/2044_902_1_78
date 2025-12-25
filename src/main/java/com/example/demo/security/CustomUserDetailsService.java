@@ -12,11 +12,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        // TEMP hardcoded (college-level is fine)
         return User.builder()
                 .username(username)
                 .password("{noop}password")
-                .roles("USER") // or ADMIN
+                .roles("USER")
                 .build();
     }
 }
