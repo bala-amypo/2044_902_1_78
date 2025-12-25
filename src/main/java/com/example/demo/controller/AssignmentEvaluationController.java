@@ -12,7 +12,7 @@ public class AssignmentEvaluationController {
 
     private final AssignmentEvaluationRecordService service;
 
-    public AssignmentEvaluationRecordController(
+    public AssignmentEvaluationController(
             AssignmentEvaluationRecordService service) {
         this.service = service;
     }

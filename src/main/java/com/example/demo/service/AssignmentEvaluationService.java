@@ -11,7 +11,7 @@ public class AssignmentEvaluationService {
 
     private final AssignmentEvaluationRecordRepository repo;
 
-    public AssignmentEvaluationRecordService(
+    public AssignmentEvaluationService(
             AssignmentEvaluationRecordRepository repo) {
         this.repo = repo;
     }
