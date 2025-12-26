@@ -21,11 +21,24 @@ public class VolunteerProfile {
     @Column(unique = true)
     private String phone;
     
+    private String password;
+    
+    private String role = "VOLUNTEER";
+    
     private String availabilityStatus = "AVAILABLE";
     
     @Column(updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    public VolunteerProfile() {}
+
+    public VolunteerProfile(String fullName, String email, String availabilityStatus) {
+        this.fullName = fullName;
+        this.email = email;
+        this.availabilityStatus = availabilityStatus;
+    }
+
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
@@ -40,6 +53,12 @@ public class VolunteerProfile {
     
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
+    
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+    
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
     
     public String getAvailabilityStatus() { return availabilityStatus; }
     public void setAvailabilityStatus(String availabilityStatus) { this.availabilityStatus = availabilityStatus; }
