@@ -11,11 +11,25 @@ public class VolunteerSkillRecord {
     private Long id;
     
     private Long volunteerId;
+    
     private String skillName;
+    
     private String skillLevel;
+    
     private boolean certified;
+    
     private LocalDateTime updatedAt = LocalDateTime.now();
 
+    public VolunteerSkillRecord() {}
+
+    public VolunteerSkillRecord(Long volunteerId, String skillName, String skillLevel, boolean certified) {
+        this.volunteerId = volunteerId;
+        this.skillName = skillName;
+        this.skillLevel = skillLevel;
+        this.certified = certified;
+    }
+
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     

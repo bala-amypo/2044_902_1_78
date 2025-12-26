@@ -11,10 +11,29 @@ public class AssignmentEvaluationRecord {
     private Long id;
     
     private Long assignmentId;
+    
     private Integer rating;
+    
     private String feedback;
+    
     private LocalDateTime evaluatedAt = LocalDateTime.now();
 
+    public AssignmentEvaluationRecord() {}
+
+    public AssignmentEvaluationRecord(Long assignmentId, Integer rating, String feedback) {
+        this.assignmentId = assignmentId;
+        this.rating = rating;
+        this.feedback = feedback;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (this.evaluatedAt == null) {
+            this.evaluatedAt = LocalDateTime.now();
+        }
+    }
+
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     

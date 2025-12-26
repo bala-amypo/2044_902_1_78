@@ -11,10 +11,32 @@ public class TaskAssignmentRecord {
     private Long id;
     
     private Long taskId;
+    
     private Long volunteerId;
+    
     private String status = "ACTIVE";
+    
     private LocalDateTime assignedAt = LocalDateTime.now();
 
+    public TaskAssignmentRecord() {}
+
+    public TaskAssignmentRecord(Long taskId, Long volunteerId, String status) {
+        this.taskId = taskId;
+        this.volunteerId = volunteerId;
+        this.status = status;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (this.status == null) {
+            this.status = "ACTIVE";
+        }
+        if (this.assignedAt == null) {
+            this.assignedAt = LocalDateTime.now();
+        }
+    }
+
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
@@ -27,6 +49,13 @@ public class TaskAssignmentRecord {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     
-    public LocalDateTime getAssignedAt() { return assignedAt; }
-    public void setAssignedAt(LocalDateTime assignedAt) { this.assignedAt = assignedAt; }
+    @PrePersist
+    public void prePersist() {
+        if (this.status == null) {
+            this.status = "ACTIVE";
+        }
+        if (this.assignedAt == null) {
+            this.assignedAt = LocalDateTime.now();
+        }
+    }
 }
