@@ -4,44 +4,33 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class TaskRecord {
-
+@Table(name = "volunteer_skill_records")
+public class VolunteerSkillRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    private Long volunteerId;
+    private String skillName;
+    private String skillLevel;
+    private boolean certified;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
-    @Column(unique = true)
-    private String taskCode;
-
-    private String taskName;
-    private String requiredSkill;
-    private String requiredSkillLevel;
-    private String priority;
-    private String status;
-
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    void onCreate() {
-        createdAt = LocalDateTime.now();
-        status = "OPEN";
-    }
-
-    // getters & setters
-    public String getTaskName() {
-    return taskName;
-}
-
-public void setTaskName(String taskName) {
-    this.taskName = taskName;
-}
-
-public String getRequiredSkill() {
-    return requiredSkill;
-}
-
-public void setRequiredSkill(String requiredSkill) {
-    this.requiredSkill = requiredSkill;
-}
-
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    
+    public Long getVolunteerId() { return volunteerId; }
+    public void setVolunteerId(Long volunteerId) { this.volunteerId = volunteerId; }
+    
+    public String getSkillName() { return skillName; }
+    public void setSkillName(String skillName) { this.skillName = skillName; }
+    
+    public String getSkillLevel() { return skillLevel; }
+    public void setSkillLevel(String skillLevel) { this.skillLevel = skillLevel; }
+    
+    public boolean isCertified() { return certified; }
+    public void setCertified(boolean certified) { this.certified = certified; }
+    
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }
