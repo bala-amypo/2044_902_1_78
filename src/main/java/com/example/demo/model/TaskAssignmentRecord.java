@@ -49,13 +49,6 @@ public class TaskAssignmentRecord {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     
-    @PrePersist
-    public void prePersist() {
-        if (this.status == null) {
-            this.status = "ACTIVE";
-        }
-        if (this.assignedAt == null) {
-            this.assignedAt = LocalDateTime.now();
-        }
-    }
+    public LocalDateTime getAssignedAt() { return assignedAt; }
+    public void setAssignedAt(LocalDateTime assignedAt) { this.assignedAt = assignedAt; }
 }
