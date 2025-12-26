@@ -2,7 +2,6 @@ package com.example.demo.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +16,9 @@ public class JwtTokenProvider {
     private final SecretKey key;
     private final long expiration;
     
-    public JwtTokenProvider(@Value("${app.jwt.secret}") String secret, 
-                           @Value("${app.jwt.expiration-ms}") long expiration) {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
-        this.expiration = expiration;
+    public JwtTokenProvider() {
+        this.key = Keys.hmacShaKeyFor("VerySecretKeyForJwtDemoApplication123456".getBytes());
+        this.expiration = 3600000L;
     }
     
     public String generateToken(Authentication authentication, Long userId, String role) {
