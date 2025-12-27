@@ -49,6 +49,17 @@ public class AuthServiceImpl implements AuthService {
         
         return new AuthResponse(token, (Long) user.get("userId"), (String) user.get("role"));
     }
+
+    @Service
+    public class AuthServiceImpl implements AuthService {
+
+    @Override
+    public void login() { }
+
+    @Override
+    public void logout() { }
+}
+
     
     @Override
     public AuthResponse register(RegisterRequest request) {
