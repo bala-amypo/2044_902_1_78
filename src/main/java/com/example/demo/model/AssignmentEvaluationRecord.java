@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class AssignmentEvaluationRecord {
@@ -9,15 +10,37 @@ public class AssignmentEvaluationRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // SIMPLE FIELD (this is the key fix)
     private Long assignmentId;
 
-    private Integer score;
+    private int rating;
 
-    public AssignmentEvaluationRecord() {}
+    private String feedback;
 
-    public Long getId() {
-        return id;
+    private LocalDateTime evaluatedAt;
+
+    public AssignmentEvaluationRecord() {
+        this.evaluatedAt = LocalDateTime.now();
+    }
+
+    // ✅ REQUIRED BY TESTS
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public LocalDateTime getEvaluatedAt() {
+        return evaluatedAt;
     }
 
     public Long getAssignmentId() {
@@ -26,13 +49,5 @@ public class AssignmentEvaluationRecord {
 
     public void setAssignmentId(Long assignmentId) {
         this.assignmentId = assignmentId;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
     }
 }
