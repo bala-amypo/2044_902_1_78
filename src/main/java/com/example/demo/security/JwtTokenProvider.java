@@ -1,6 +1,7 @@
 package com.example.demo.security;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,15 @@ public class JwtTokenProvider {
         this.secret = secret;
         this.validity = validity;
     }
+
+    // ✅ REQUIRED BY TEST
+    public Claims getAllClaims(String token) {
+    return Jwts.parserBuilder()
+            .setSigningKey(getKey())
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+}
 
     // 🔥 default constructor for Spring
     public JwtTokenProvider() {
@@ -67,4 +77,6 @@ public class JwtTokenProvider {
                 .getBody()
                 .getSubject();
     }
+
+
 }
