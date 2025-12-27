@@ -1,7 +1,6 @@
 package com.example.demo.security;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -15,24 +14,15 @@ public class JwtTokenProvider {
     private String secret;
     private long validity;
 
-    // 🔥 constructor used in TESTS
+    // ✅ used by TESTS
     public JwtTokenProvider(String secret, long validity) {
         this.secret = secret;
         this.validity = validity;
     }
 
-    // ✅ REQUIRED BY TEST
-    public Claims getAllClaims(String token) {
-    return Jwts.parserBuilder()
-            .setSigningKey(getKey())
-            .build()
-            .parseClaimsJws(token)
-            .getBody();
-}
-
-    // 🔥 default constructor for Spring
+    // ✅ used by SPRING
     public JwtTokenProvider() {
-        this.secret = "default-secret-key-default-secret-key"; // 32+ chars
+        this.secret = "default-secret-key-default-secret-key"; // min 32 chars
         this.validity = 3600000; // 1 hour
     }
 
@@ -40,7 +30,7 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    // ✅ REQUIRED BY AuthController
+    // ✅ AuthController
     public String generateToken(Authentication authentication, Long userId, String role) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + validity);
@@ -55,7 +45,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    // ✅ REQUIRED BY JwtAuthenticationFilter
+    // ✅ JwtAuthenticationFilter
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
@@ -68,15 +58,17 @@ public class JwtTokenProvider {
         }
     }
 
-    // ✅ REQUIRED BY JwtAuthenticationFilter
+    // ✅ JwtAuthenticationFilter
     public String getUsernameFromToken(String token) {
+        return getAllClaims(token).getSubject();
+    }
+
+    // ✅ REQUIRED BY TEST CASE (last error)
+    public Claims getAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build()
                 .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+                .getBody();
     }
-
-
 }
