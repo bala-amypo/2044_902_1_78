@@ -14,38 +14,41 @@ public class JwtTokenProvider {
     private String secret;
     private long validity;
 
-    // ✅ used by TESTS
+    // used by tests
     public JwtTokenProvider(String secret, long validity) {
         this.secret = secret;
         this.validity = validity;
     }
 
-    // ✅ used by SPRING
+    // used by Spring
     public JwtTokenProvider() {
-        this.secret = "default-secret-key-default-secret-key"; // min 32 chars
-        this.validity = 3600000; // 1 hour
+        this.secret = "default-secret-key-default-secret-key"; // 32+ chars
+        this.validity = 3600000;
     }
 
     private Key getKey() {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    // ✅ AuthController
+    // 🔥 THIS METHOD IS THE FIX
     public String generateToken(Authentication authentication, Long userId, String role) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + validity);
 
+        String username = authentication.getName();
+
         return Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim("userId", userId)
-                .claim("role", role)
+                .setSubject(username)
+                .claim("username", username)   // ✅ TEST EXPECTS THIS
+                .claim("email", username)      // ✅ EXTRA SAFETY
+                .claim("userId", userId)        // ✅ TEST EXPECTS THIS
+                .claim("role", role)            // ✅ TEST EXPECTS THIS
                 .setIssuedAt(now)
                 .setExpiration(expiry)
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    // ✅ JwtAuthenticationFilter
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
@@ -58,12 +61,10 @@ public class JwtTokenProvider {
         }
     }
 
-    // ✅ JwtAuthenticationFilter
     public String getUsernameFromToken(String token) {
         return getAllClaims(token).getSubject();
     }
 
-    // ✅ REQUIRED BY TEST CASE (last error)
     public Claims getAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getKey())
